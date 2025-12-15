@@ -5,36 +5,6 @@
 - ฝึกเขียน Stub/Driver/Spy
 - เข้าใจการแยกส่วนบริการ (Inventory, Payment, Shipping, Email) และการรวมระบบ
 
-### 1) Top-down Integration
-- Start from **OrderService**
-- Replace lower components with **Stubs / Spies**
-- Focus: workflow, error handling, orchestration
-
-Examples:
-- Payment fails → stock must be released
-- Email is sent after successful order
-
----
-
-### 2) Bottom-up Integration
-- Start from **low-level components**
-- Use real implementations
-- Focus: correctness at boundaries
-
-Examples:
-- Inventory reserve/release
-- Edge cases (qty = 0, negative qty)
-
----
-
-### 3) Sandwich (Hybrid)
-- Combine both approaches
-- Real middle components + stub/spy at edges
-
-Examples:
-- Real Payment + Spy Email
-- Verify shipping cost logic by region
-
 ---
 
 วิธีเริ่มต้น
@@ -45,16 +15,20 @@ Examples:
 
 แบบฝึกหัดที่ต้องทำ
 - ทำความเข้าใจโค้ดในไฟล์: inventory.py, payment.py, shipping.py, emailer.py, order.py
-- อ่านเทสต์ตัวอย่างใน tests/ แล้ว:
-  1) เพิ่มกรณีทดสอบ Top-down:
-     - เขียน StubPayment ที่ล้มเหลวแบบต่างๆ
-     - เพิ่ม SpyEmail ตรวจ subject/body
-  2) เพิ่มกรณีทดสอบ Bottom-up:
-     - เพิ่มเทสต์ reserve/release ที่ขอบเขต
-  3) เพิ่มกรณีทดสอบ Sandwich:
-     - ใช้ SimplePayment จริง + Email spy
-     - เพิ่ม region อื่น (เช่น "US")
-- สรุปสิ่งที่ค้นพบสั้นๆ (5–10 บรรทัด)
+- ทำเทสต์ครบ 3 แบบ: Top-down, Bottom-up, Sandwich 
+     - อ่านเทสต์ตัวอย่างใน tests/ แล้ว:
+            1) เพิ่มกรณีทดสอบ Top-down:
+               - เขียน StubPayment ที่ล้มเหลวแบบต่างๆ
+               - เพิ่ม SpyEmail ตรวจ subject/body
+            2) เพิ่มกรณีทดสอบ Bottom-up:
+               - เพิ่มเทสต์ reserve/release ที่ขอบเขต
+            3) เพิ่มกรณีทดสอบ Sandwich:
+               - ใช้ SimplePayment จริง + Email spy
+               - เพิ่ม region อื่น (เช่น "US")
+- Automation/CI: ตั้งค่าให้เทสต์เหล่านี้รันอัตโนมัติบน GitHub Actions ทุกครั้งที่ push/PR และได้ผลลัพธ์ที่เชื่อถือได้
+     - รันเฉพาะหมวดได้ เช่น pytest -m topdown -q
+     - ปรับ GitHub Actions ให้ทำ coverage,
+- สรุปสิ่งที่ค้นพบสั้นๆ (อย่างต่ำ 10 บรรทัด) 
 
 ## What You Must Do (Checklist)
 
