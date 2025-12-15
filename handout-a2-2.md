@@ -12,8 +12,8 @@ You will work with a small Order Service composed of multiple collaborating comp
 
 ## System Overview
 **Architecture**
-OrderService
-├─ Inventory
-├─ Payment
-├─ Shipping
-└─ Email
+**OrderService
+**├─ Inventory
+**├─ Payment
+**├─ Shipping
+**└─ Email
