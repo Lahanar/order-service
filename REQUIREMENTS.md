@@ -82,6 +82,68 @@
 
 ## ข้อสมมติ
 
-* ข้อมูล `items` ถูกต้องตาม type ที่กำหนด (ไม่เช็คประเภทแบบละเอียด)
+* items มี type ถูกต้อง
 * ไม่มีค่าใช้จ่ายอื่นนอกจาก shipping
-* ไม่พิจารณาความปลอดภัย/การยืนยันตัวตน
+* ไม่พิจารณา security / auth
+
+---
+
+## Acceptance Criteria Table
+
+| ID | Requirement | Acceptance Criteria | Covered By Tests |
+|----|------------|--------------------|-----------------|
+| AC-INV-01 | add_stock | qty < 0 → InventoryError |        |
+| AC-INV-02 | reserve | qty > stock → InventoryError |        |
+| AC-INV-03 | reserve | qty ≤ 0 → InventoryError |         |
+| AC-INV-04 | release | qty ≤ 0 → InventoryError |         |
+| AC-INV-05 | reserve+release | stock ถูกหักและคืนถูกต้อง |          |
+| AC-SHIP-01 | shipping TH ≤5kg | cost = 50 |         |
+| AC-SHIP-02 | shipping TH >5kg | cost = 120 |         |
+| AC-SHIP-03 | shipping non-TH | cost = 300 |          |
+| AC-PAY-01 | payment amount ≤0 | declined |         |
+| AC-PAY-02 | payment amount >1000 | declined |          |
+| AC-PAY-03 | payment valid | tx_id returned |          |
+| AC-ORD-01 | payment fail | stock released |          |
+| AC-ORD-02 | success order | email sent |         |
+| AC-ORD-03 | email failure | order still succeeds |         |
+| AC-ORD-04 | total calculation | subtotal + shipping |         |
+
+---
+
+## Mapping to Current Test Files
+
+### tests/test_inventory_bottomup.py
+Covers:
+- 
+
+Missing:
+- 
+---
+
+### tests/test_order_topdown.py
+Covers:
+- 
+
+Missing:
+- 
+---
+
+### tests/test_order_sandwich.py
+Covers:
+- 
+
+Missing:
+- 
+
+---
+
+## Non-Functional Requirements
+
+- Python 3.10+
+- pytest
+- CI ผ่าน GitHub Actions
+- เทสต์ทั้งหมดควรรันภายในไม่กี่วินาที
+
+---
+
+
