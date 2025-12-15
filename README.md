@@ -67,18 +67,18 @@ Examples:
 
 ### High-Level Call Graph
 OrderService  
- ├── InventoryRepository    
- │    ├── reserve()  
- │    └── release()  
- │  
- ├── ShippingService  
- │    └── cost()  
- │  
- ├── PaymentGateway    
- │    └── charge()  
- │
- └── EmailService    
-      └── send()  
+├── InventoryRepository  
+│   ├── reserve()  
+│   └── release()  
+│  
+├── ShippingService  
+│   └── cost()  
+│  
+├── PaymentGateway  
+│   └── charge()  
+│  
+└── EmailService  
+    └── send()
 
 
 ### Extend Tests (see TODOs)
